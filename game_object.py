@@ -13,7 +13,7 @@ class GameObject():
     
     # Un objet de jeu possède une méthode update qui devra être
     # lancé à chaque frame du jeu
-    def update(self, screen: Surface):
+    def update(self):
         # Si on n'a pas utilisé de polymorphisme pour implémenter
         # cette méhode, comme on devrait le faire avec une interface,
         # on lance une erreur

@@ -11,22 +11,24 @@ class Ball(GameObject):
         # La direction de la balle (Vecteur normalisé)
         self.dir = Vector2(1, 1)
         # La vitesse de déplacement de la balle
-        self.speed = 0.2
+        self.speed = 0.3
         # Le diamètre de la balle en pixel
         self.size = 5
 
     # Méthode d'initialisation de l'objet, à exécuter une fois au début
     def init(self, screen: Surface):
+        self.screen = screen
+        # On place la balle au centre de l'écran
         self.pos = Vector2(screen.get_width()/2, screen.get_height()/2)
 
     # Méthode de mise à jour de l'objet, à exécuter à chaque image
-    def update(self, screen: Surface):
+    def update(self):
 
         # Si la balle va sortir de l'écran verticalement
-        if (self.is_touching_y_side(screen)):
+        if (self.is_touching_y_side()):
 
             # On la remet à la bordure la plus proche (haut ou bas)
-            self.pos.y = min(self.pos.y, screen.get_height())
+            self.pos.y = min(self.pos.y, self.screen.get_height())
             self.pos.y = max(self.pos.y, 0)
 
             # On inverse sa direction pour faire un rebond
@@ -40,16 +42,17 @@ class Ball(GameObject):
         )
 
         # On dessine un cercle là où se tient la balle
-        draw.circle(screen, (255, 255, 255), self.pos, self.size)
+        draw.circle(self.screen, (255, 255, 255), self.pos, self.size)
 
     # Retourne True si la balle touche le coté gauche ou droit de l'écran
-    def is_touching_x_side(self, screen):
-        return (self.pos.x < 0 or self.pos.x > screen.get_width())
+    def is_touching_x_side(self):
+        return (self.pos.x < 0 or self.pos.x > self.screen.get_width())
 
     # Retourne True si la balle touche le coté haut ou bas de l'écran
-    def is_touching_y_side(self, screen):
-        return (self.pos.y < 0 or self.pos.y > screen.get_height())
+    def is_touching_y_side(self):
+        return (self.pos.y < 0 or self.pos.y > self.screen.get_height())
 
     # Retourne True si la balle touche un rectangle
     def is_touching_rect(self, rect: Rect):
+        # Pour ça on crée un rectangle aux même dimensions et position que le cercle
         return rect.colliderect(Rect(self.pos, Vector2(self.size)))

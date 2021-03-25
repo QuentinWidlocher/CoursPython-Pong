@@ -21,13 +21,13 @@ class Game(GameObject):
 
     # Lance les update de chaque objet à chaque frame et gère la 
     # relation entre les objets
-    def update(self, screen: Surface):
-        self.ball.update(screen)
-        self.player_paddle.update(screen)
-        self.enemy_paddle.update(screen)
+    def update(self):
+        self.ball.update()
+        self.player_paddle.update()
+        self.enemy_paddle.update()
 
         # Si la balle touche un coté de l'écran, c'est perdu !
-        if (self.ball.is_touching_x_side(screen)):
+        if (self.ball.is_touching_x_side()):
             # On stop le jeu comme un gros crado
             # TODO: Faire plus propre, pourquoi pas ? ;)
             self.should_run = False

@@ -21,21 +21,21 @@ def main():
     # Chaque tour de boucle représente une frame
     while game.should_run:
 
-        # On efface l'ecran (on le rempli de noir, c'est pareil)
-        screen.fill((0,0,0))
-
-        # On lance la fonction update du jeu
-        game.update(screen)
-
-        # On met à jour l'affichage de l'écran pour afficher les modifs
-        display.update()
-
         # On récupère tous les évènement de pygame
         for event in pygame.event.get():
             # On s'occupe uniquement de l'évènement QUIT (croix, alt+f4)
             if event.type == pygame.QUIT:
                 # On met la variable running à False ce qui annule la boucle
                 game.should_run = False
+
+        # On efface l'ecran (on le rempli de noir, c'est pareil)
+        screen.fill((0,0,0))
+
+        # On lance la fonction update du jeu
+        game.update()
+
+        # On met à jour l'affichage de l'écran pour afficher les modifs
+        display.update()
 
 
 # On exécute la fonction main() uniquement si on lance le fichier main.py
